@@ -1,19 +1,23 @@
 #!/usr/bin/make -f
 
 
-BUILD_ROOT=$(CURDIR)/debian/tmp
-install:
-trm -rf ${BUILD_ROOT}
-tmkdir -p ${BUILD_ROOT}/usr/bin
-tinstall -m 755 coreunreg ${BUILD_ROOT}/usr/bin
+build: build-stamp
+build-stamp: 
+	./configure
+	make
+	touch build-stamp
 
-build:
-t./configure
-tmake
-binary-indep:
+install: install-stamp
+install-stamp:
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	install -m 755 coreunreg debian/openpanel-coreunreg/usr/bin
+	touch install-stamp
 
-binary-arch binary: build install
-	if [ -d debian/tmp ] ; then dh_install -a --sourcedir=debian/tmp ; fi
+binary-indep: build install
+
+binary-arch: build install
 	dh_installdocs -a
 	dh_installdeb -a
 	dh_compress -a
@@ -22,5 +26,12 @@ binary-arch binary: build install
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a
+
+binary: binary-indep binary-arch
+
+clean:
+	rm -f build-stamp install-stamp
+	[ ! -f makeinclude ] || make clean
+	dh_clean
 
 .PHONY: build binary binary-arch binary-indep clean install
