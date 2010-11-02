@@ -2,7 +2,7 @@ Source: openpanel-coreunreg
 Section: misc
 Priority: optional
 Maintainer: OpenPanel/Panel6 packager <packages@panelsix.com>
-Build-Depends: debhelper (>= 5), libgrace-querido-devel
+Build-Depends: debhelper (>= 5), libgrace-querido-dev
 Standards-Version: 3.7.2
 
 Package: openpanel-coreunreg
