@@ -16,11 +16,11 @@ int coreunregApp::main (void)
 		return 1;
 	}
 	statstring modname = argv["*"][0];
-	xmlschema modschema ("/var/opencore/bin/opencore.app/Contents/Schemas/"
+	xmlschema modschema ("/var/openpanel/bin/opencore.app/Contents/Schemas/"
 						 "com.openpanel.opencore.module.schema.xml");
 
 	value dbinfo;
-	dbinfo["path"] = "/var/opencore/db/panel/panel.db";
+	dbinfo["path"] = "/var/openpanel/db/panel/panel.db";
 	
 	dbengine DB (dbengine::SQLite);
 	if (! DB.open (dbinfo))
@@ -30,16 +30,16 @@ int coreunregApp::main (void)
 	}
 	
 	value modcache;
-	modcache.loadshox ("/var/opencore/cache/module.cache");
+	modcache.loadshox ("/var/openpanel/cache/module.cache");
 	if (modcache["modules"].exists (modname))
 	{
 		fout.printf ("%% Removing module from module.cache\n");
 		modcache["modules"].rmval (modname);
 	}
-	modcache.saveshox ("/var/opencore/cache/module.cache");
+	modcache.saveshox ("/var/openpanel/cache/module.cache");
 	
 	string modxmlpath;
-	modxmlpath.printf ("/var/opencore/modules/%s/module.xml", modname.str());
+	modxmlpath.printf ("/var/openpanel/modules/%s/module.xml", modname.str());
 	
 	value modxml;
 	modxml.loadxml (modxmlpath, modschema);
