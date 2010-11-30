@@ -7,6 +7,6 @@ Standards-Version: 3.7.2
 
 Package: openpanel-coreunreg
 Architecture: any
-Depends: openpanel-core (>= 0.8.0), libgrace, ${shlibs:Depends}, ${misc:Depends}
+Depends: openpanel-core (>= 0.8.0), libgrace, libgrace-querido, ${shlibs:Depends}, ${misc:Depends}
 Description: OpenPanel development tool
  A development tool for manipulating the opencore module database
