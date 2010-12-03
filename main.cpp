@@ -16,7 +16,7 @@ int coreunregApp::main (void)
 		return 1;
 	}
 	statstring modname = argv["*"][0];
-	xmlschema modschema ("/var/openpanel/bin/opencore.app/Contents/Schemas/"
+	xmlschema modschema ("/var/openpanel/bin/openpaneld.app/Contents/Schemas/"
 						 "com.openpanel.opencore.module.schema.xml");
 
 	value dbinfo;
